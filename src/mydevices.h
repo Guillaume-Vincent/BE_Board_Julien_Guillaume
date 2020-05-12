@@ -7,8 +7,10 @@
 #include <string.h>
 #include "core_simulation.h"
 
+
 // Capteur analogique de luminosité
-class AnalogSensorLight : public Device {
+class AnalogSensorLight : public Device
+{
 private:
   // valeur de luminosité mesuree
   int val;

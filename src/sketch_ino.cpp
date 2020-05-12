@@ -32,10 +32,13 @@ void Board::loop(){
     Serial.println(buf_temperature);
 
     if(cpt%5==0){
-        // tous les 5 fois on affiche sur l ecran la temperature et la luminosite
+      // tous les 5 fois on affiche sur l ecran la temperature et la luminosite
       sprintf(buf_temperature,"%d",val_temperature);
-      sprintf(buf_luminosite, "%d", val_temperature);
       bus.write(1, buf_temperature, 100);
+    }
+    if(cpt%5==1){
+      // tous les 5 fois on affiche sur l ecran la luminosite
+      sprintf(buf_luminosite, "%d", val_luminosite);
       bus.write(1, buf_luminosite, 100);
     }
     cpt++;

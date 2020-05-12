@@ -10,6 +10,8 @@ AnalogSensorLight::AnalogSensorLight(int delai, int luminosite)
 
 void AnalogSensorLight::run(){
   while(1){
+  	if(ptrmem!=NULL)
+      *ptrmem=val;
     sleep(temps);
   }
 }
