@@ -1,8 +1,6 @@
 #include "core_simulation.h"
 #include "mydevices.h"
-
-// Variables globales
-int luminosite_environnement = 200; // Lux
+#include "global.h"
 
 int main()
 {
@@ -24,4 +22,3 @@ int main()
   esp8266.run();
   return 0;
 }
-

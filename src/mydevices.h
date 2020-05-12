@@ -7,6 +7,23 @@
 #include <string.h>
 #include "core_simulation.h"
 
+// exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
+class IntelligentDigitalActuatorLED : public Device
+{
+private:
+  // etat de la LED
+  int state;
+  // temps entre 2 affichage de l etat de la led
+  int temps;
+
+public:
+  // initialisation du temps de rafraichiisement
+  IntelligentDigitalActuatorLED(int t);
+  // thread representant l'actionneur et permettant de fonctionner independamment de la board
+  virtual void run();
+  // Changer l'état de la led
+  void toggle();
+};
 
 // Capteur analogique de luminosité
 class AnalogSensorLight : public Device
