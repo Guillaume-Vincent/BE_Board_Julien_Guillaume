@@ -3,6 +3,17 @@
 
 using namespace std;
 
+//classe AnalogSensorLight
+AnalogSensorLight::AnalogSensorLight(int delai, int luminosite)
+:Device(), val(luminosite), temps(delai) {
+}
+
+void AnalogSensorLight::run(){
+  while(1){
+    sleep(temps);
+  }
+}
+
 //classe AnalogSensorTemperature
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
   alea=1;

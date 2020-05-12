@@ -21,7 +21,7 @@ string BoardException::text(){
   return s;
 }
 
-// classe terminale
+// classe terminal
 void Terminal::begin(int speed){
   if (speed!=9600){
     cerr << "wrong speed\n";
