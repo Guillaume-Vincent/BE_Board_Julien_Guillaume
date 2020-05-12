@@ -1,5 +1,6 @@
 #include "mydevices.h"
-
+#include "core_simulation.h"
+#include "global.h"
 using namespace std;
 
 //classe IntelligentDigitalActuatorLED
@@ -9,42 +10,43 @@ IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t) : Device(), 
 
 void IntelligentDigitalActuatorLED::run()
 {
+  bool oldstate = LOW;
+
   while (1)
   {
+    // on fait concorder l'état du pin et de la led
     if (ptrmem != NULL)
       state = *ptrmem;
+    cout << "lulu  = " << luminosite_environnement << endl;
+    if (oldstate != state)
+    {
+      cout << "la led switch vers " << state << " depuis " << oldstate << endl;
+      if (state == LOW)
+        luminosite_environnement -= 50;
 
-    this->toggle();
+      else
+        luminosite_environnement += 50;
+
+      oldstate = state;
+    }
 
     sleep(temps);
   }
 }
 
-void IntelligentDigitalActuatorLED::toggle()
-{
-  extern int luminosite_environnement;
-  if (this->state == 0)
-  {
-    this->state = 1;
-    luminosite_environnement += 50;
-  }
-  else
-  {
-    this->state = 0;
-    luminosite_environnement -= 50;
-  }
-}
-
 //classe AnalogSensorLight : constructeur
-AnalogSensorLight::AnalogSensorLight(int delai, int luminosite)
-    : Device(), val(luminosite), temps(delai)
+AnalogSensorLight::AnalogSensorLight(int delai)
+    : Device(), val(luminosite_environnement), temps(delai)
 {
 }
 
-void AnalogSensorLight::run(){
-  while(1){
-  	if(ptrmem!=NULL)
-      *ptrmem=val;
+void AnalogSensorLight::run()
+{
+  while (1)
+  {
+    val = luminosite_environnement;
+    if (ptrmem != NULL)
+      *ptrmem = val;
     sleep(temps);
   }
 }

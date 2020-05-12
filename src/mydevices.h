@@ -12,7 +12,7 @@ class IntelligentDigitalActuatorLED : public Device
 {
 private:
   // etat de la LED
-  int state;
+  bool state;
   // temps entre 2 affichage de l etat de la led
   int temps;
 
@@ -21,8 +21,6 @@ public:
   IntelligentDigitalActuatorLED(int t);
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
-  // Changer l'état de la led
-  void toggle();
 };
 
 // Capteur analogique de luminosité
@@ -35,7 +33,7 @@ private:
   int temps;
 
 public:
-  AnalogSensorLight(int delai, int luminosite);
+  AnalogSensorLight(int delai);
   virtual void run();
 };
 
