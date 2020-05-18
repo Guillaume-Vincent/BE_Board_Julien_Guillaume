@@ -47,15 +47,15 @@ void Board::loop()
         // On affiche à tour de rôle sur l'écran:
         // la température, la luminosité, et l'état du bouton
         if (cpt % 5 == 0) {
-            sprintf(buf_temperature, "Temperature : %d", val_temperature);
+            sprintf(buf_temperature, " Temperature : %d", val_temperature);
             bus.write(1, buf_temperature, 100);
         }
         if (cpt % 5 == 1) {
-            sprintf(buf_luminosite, "Luminosite : %d", val_luminosite);
+            sprintf(buf_luminosite, " Luminosite : %d", val_luminosite);
             bus.write(1, buf_luminosite, 100);
         }
         if (cpt % 5 == 2) {
-            sprintf(buf_bouton, "Bouton : %d", val_bouton);
+            sprintf(buf_bouton, " Bouton : %d", val_bouton);
             bus.write(1, buf_bouton, 100);
         }
         cpt++;
