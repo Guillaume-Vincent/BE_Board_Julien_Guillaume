@@ -3,35 +3,53 @@
 #include "global.h"
 using namespace std;
 
+//classe ExternalDigitalSensorButton
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(int t)
+: Device(), temps(t) {
+	stateUpdate();
+}
+
+void ExternalDigitalSensorButton::stateUpdate() {
+	if(ifstream("on.txt"))
+		state = true;
+	else
+		state = false;
+}
+
+void ExternalDigitalSensorButton::run() {
+	while (1) {
+		stateUpdate();
+    	if (ptrmem != NULL)
+    		*ptrmem = state;
+    	sleep(temps);
+  }
+}
+
+
 //classe IntelligentDigitalActuatorLED
 IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t) : Device(), state(LOW), temps(t)
 {
 }
 
-void IntelligentDigitalActuatorLED::run()
-{
-  bool oldstate = LOW;
-
-  while (1)
-  {
-    // on fait concorder l'état du pin et de la led
-    if (ptrmem != NULL)
-      state = *ptrmem;
-    cout << "lulu  = " << luminosite_environnement << endl;
-    if (oldstate != state)
-    {
-      cout << "la led switch vers " << state << " depuis " << oldstate << endl;
-      if (state == LOW)
-        luminosite_environnement -= 50;
-
-      else
-        luminosite_environnement += 50;
-
-      oldstate = state;
-    }
-
-    sleep(temps);
-  }
+void IntelligentDigitalActuatorLED::run() {
+	bool oldstate = LOW;
+	while (1) {
+	// on fait concorder l'état de la led avec l'état du pin
+		if (ptrmem != NULL)
+			state = *ptrmem;
+		if (oldstate != state) {
+			if (state == LOW) {
+				cout << "LED switch OFF" << endl;
+				luminosite_environnement -= 50;
+			}
+			else {
+				cout << "LED switch ON" << endl;
+				luminosite_environnement += 50;
+			}
+			oldstate = state;
+	    }
+	    sleep(temps);
+	}
 }
 
 //classe AnalogSensorLight : constructeur

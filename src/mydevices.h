@@ -6,8 +6,23 @@
 #include <unistd.h>
 #include <string.h>
 #include "core_simulation.h"
+#include <fstream>
 
-// exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
+// Simulation d'un boutton
+class ExternalDigitalSensorButton : public Device
+{
+private:
+	// Etat du bouton (true:on, false:off)
+	bool state;
+	// temps entre 2 updates de l'état du bouton
+	int temps;
+public:
+	ExternalDigitalSensorButton(int t);
+	void stateUpdate();
+	virtual void run();
+};
+
+// LED intelligente
 class IntelligentDigitalActuatorLED : public Device
 {
 private:
