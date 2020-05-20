@@ -48,6 +48,7 @@ class DigitalActuator : public Device
 protected:
     int delay;
     bool state;
+    std::string name;
 
 public:
     DigitalActuator(int delay, std::string name);

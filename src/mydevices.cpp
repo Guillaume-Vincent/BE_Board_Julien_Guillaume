@@ -2,11 +2,11 @@
 #include "core_simulation.h"
 
 // Sensors constructors
-Sensor::Sensor(int delay, std::string file)
-    : delay(delay), file(file) {}
+Sensor::Sensor(int delay, std::string file, std::string name)
+    : delay(delay), file(file), name(name) {}
 
-AnalogSensor::AnalogSensor(int delay, std::string file)
-    : Sensor(delay, file), value(0) {}
+AnalogSensor::AnalogSensor(int delay, std::string file, std::string name)
+    : Sensor(delay, file, name), value(0) {}
 
 // Check if the file exists first
 // If it does, opens it and reads its content :
@@ -35,8 +35,8 @@ void AnalogSensor::run()
     }
 }
 
-DigitalSensor::DigitalSensor(int delay, std::string file)
-    : Sensor(delay, file), state(0) {}
+DigitalSensor::DigitalSensor(int delay, std::string file, std::string name)
+    : Sensor(delay, file, name), state(LOW) {}
 
 // Checks if the file exists
 // Change the state to true if it does, false if not
@@ -59,15 +59,11 @@ void DigitalSensor::run()
     }
 }
 
-DigitalActuator::DigitalActuator(int delay)
-: delay(delay), state(LOW){
+DigitalActuator::DigitalActuator(int delay, std::string name)
+: delay(delay), state(LOW), name(name){}
 
-}
-
-Buzzer::Buzzer(int delay, int frequency)
-: DigitalActuator(delay), frequency(frequency){
-
-}
+Buzzer::Buzzer(int delay, int frequency, std::string name)
+: DigitalActuator(delay, name), frequency(frequency) {}
 
 void Buzzer::run(){
     bool oldstate = LOW;
@@ -86,10 +82,8 @@ void Buzzer::run(){
     }
 }
 
-LED::LED(int delay, std::string color)
-: DigitalActuator(delay), color(color){
-
-}
+LED::LED(int delay, std::string color, std::string name)
+: DigitalActuator(delay, name), color(color) {}
 
 void LED::run(){
     bool oldstate = LOW;
