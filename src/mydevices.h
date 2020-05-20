@@ -8,6 +8,8 @@
 #include "core_simulation.h"
 #include <fstream>
 
+
+
 class DigitalActuator : public Device
 {
 private:
