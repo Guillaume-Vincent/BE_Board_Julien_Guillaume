@@ -45,9 +45,9 @@ public:
 
 class DigitalActuator : public Device
 {
-private:
+protected:
     int delay;
-    int state;
+    bool state;
 
 public:
     DigitalActuator(int delay, std::string name);
@@ -59,7 +59,7 @@ private:
     int frequency;
 
 public:
-    Buzzer(int frequency, std::string name);
+    Buzzer(int delay, int frequency, std::string name);
     virtual void run();
 };
 
@@ -69,7 +69,7 @@ private:
     std::string color;
 
 public:
-    LED(std::string color, std::string name);
+    LED(int delay, std::string color, std::string name);
     virtual void run();
 };
 
