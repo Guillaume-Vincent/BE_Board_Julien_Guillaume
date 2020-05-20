@@ -13,9 +13,10 @@ class Sensor : public Device
 protected:
     int delay;
     std::string file;
+    std::string name;
 
 public:
-    Sensor(int delay, std::string file);
+    Sensor(int delay, std::string file, std::string name);
     // updates the value of the sensor
     virtual void update() = 0;
 };
@@ -26,7 +27,7 @@ private:
     int value;
 
 public:
-    AnalogSensor(int delay, std::string file);
+    AnalogSensor(int delay, std::string file, std::string name);
     virtual void update();
     virtual void run();
 };
@@ -37,7 +38,7 @@ private:
     bool state;
 
 public:
-    DigitalSensor(int delay, std::string file);
+    DigitalSensor(int delay, std::string file, std::string name);
     virtual void update();
     virtual void run();
 };
@@ -49,7 +50,7 @@ private:
     int state;
 
 public:
-    DigitalActuator(int delay);
+    DigitalActuator(int delay, std::string name);
 };
 
 class Buzzer : public DigitalActuator
@@ -58,7 +59,7 @@ private:
     int frequency;
 
 public:
-    Buzzer(int frequency);
+    Buzzer(int frequency, std::string name);
     virtual void run();
 };
 
@@ -68,7 +69,7 @@ private:
     std::string color;
 
 public:
-    LED(std::string color);
+    LED(std::string color, std::string name);
     virtual void run();
 };
 
