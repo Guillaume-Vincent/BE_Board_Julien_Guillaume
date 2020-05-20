@@ -10,13 +10,14 @@
 
 class Sensor : public Device
 {
-private:
+protected:
     int delay;
     std::string file;
 
 public:
     Sensor(int delay, std::string file);
-    virtual void valueUpdate() = 0;
+    // updates the value of the sensor
+    virtual void update() = 0;
 };
 
 class AnalogSensor : public Sensor
@@ -26,7 +27,7 @@ private:
 
 public:
     AnalogSensor(int delay, std::string file);
-    virtual void valueUpdate();
+    virtual void update();
     virtual void run();
 };
 
@@ -37,7 +38,7 @@ private:
 
 public:
     DigitalSensor(int delay, std::string file);
-    virtual void valueUpdate();
+    virtual void update();
     virtual void run();
 };
 
@@ -59,7 +60,7 @@ private:
 public:
     Buzzer(int frequency);
     virtual void run();
-}
+};
 
 class LED : public DigitalActuator
 {
@@ -69,6 +70,6 @@ private:
 public:
     LED(std::string color);
     virtual void run();
-}
+};
 
 #endif
