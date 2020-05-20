@@ -19,6 +19,28 @@ public:
     virtual void valueUpdate() = 0;
 };
 
+class AnalogSensor : public Sensor
+{
+private:
+    int value;
+
+public:
+    AnalogSensor(int delay, std::string file);
+    virtual void valueUpdate();
+    virtual void run();
+};
+
+class DigitalSensor : public Sensor
+{
+private:
+    bool state;
+
+public:
+    DigitalSensor(int delay, std::string file);
+    virtual void valueUpdate();
+    virtual void run();
+};
+
 class DigitalActuator : public Device
 {
 private:
@@ -28,6 +50,5 @@ private:
 public:
     DigitalActuator(int delay);
 };
-
 
 #endif
