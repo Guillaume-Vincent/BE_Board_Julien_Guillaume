@@ -10,7 +10,7 @@
 
 class Sensor : public Device
 {
-private:
+protected:
     int delay;
     std::string file;
 
@@ -21,9 +21,9 @@ public:
 
 class DigitalActuator : public Device
 {
-private:
+protected:
     int delay;
-    int state;
+    bool state;
 
 public:
     DigitalActuator(int delay);
@@ -35,9 +35,9 @@ private:
     int frequency;
 
 public:
-    Buzzer(int frequency);
+    Buzzer(int delay, int frequency);
     virtual void run();
-}
+};
 
 class LED : public DigitalActuator
 {
@@ -45,8 +45,8 @@ private:
     std::string color;
 
 public:
-    LED(std::string color);
+    LED(int delay, std::string color);
     virtual void run();
-}
+};
 
 #endif
