@@ -16,7 +16,30 @@ protected:
 
 public:
     Sensor(int delay, std::string file);
-    virtual void valueUpdate() = 0;
+    // updates the value of the sensor
+    virtual void update() = 0;
+};
+
+class AnalogSensor : public Sensor
+{
+private:
+    int value;
+
+public:
+    AnalogSensor(int delay, std::string file);
+    virtual void update();
+    virtual void run();
+};
+
+class DigitalSensor : public Sensor
+{
+private:
+    bool state;
+
+public:
+    DigitalSensor(int delay, std::string file);
+    virtual void update();
+    virtual void run();
 };
 
 class DigitalActuator : public Device
