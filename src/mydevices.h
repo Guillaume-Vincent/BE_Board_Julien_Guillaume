@@ -29,5 +29,24 @@ public:
     DigitalActuator(int delay);
 };
 
+class Buzzer : public DigitalActuator
+{
+private:
+    int frequency;
+
+public:
+    Buzzer(int frequency);
+    virtual void run();
+}
+
+class LED : public DigitalActuator
+{
+private:
+    std::string color;
+
+public:
+    LED(std::string color);
+    virtual void run();
+}
 
 #endif
