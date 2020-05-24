@@ -20,6 +20,8 @@ void AnalogSensor::update()
         std::string buffer;
         infile.open(this->file);
         infile >> buffer;
+        // todo : exception : if bad argument do nothing and wait for the next one
+        // if bad argument too many times, stop the program and alert the user
         value = std::stoi(buffer);
     }
 }
@@ -97,9 +99,9 @@ void LED::run()
         if (oldstate != state)
         {
             if (state == LOW)
-                cout << "LED OFF" << endl;
+                cout << name << " off" << endl;
             else
-                cout << "LED ON" << endl;
+                cout << name << " on" << endl;
             oldstate = state;
         }
         sleep(delay);

@@ -102,8 +102,11 @@ void Board::loop()
     if (reset_counter > 0)
         reset_counter--;
 
-    // let's display the state of our system
-    cout << "ALARM-RINGING : " << alarm_ringing << endl;
+    // display the environmental status
+    cout << "temperature : " << temperature << endl;
+    cout << "smoke : " << smoke_level << endl;
+    cout << "battery : " << battery_level << endl;
+    cout << endl;
 
     sleep(1);
 

@@ -11,9 +11,9 @@ int main()
     //TODO : exceptions si pas de fichier avec ce nom (si pas de data, renvoie -1)
 
     // these sensors get information about the environment
-    AnalogSensor sensor_temperature(DELAY, "temp.data", "temperature");
-    AnalogSensor sensor_smoke(DELAY, "smoke.data", "smoke");
-    AnalogSensor sensor_battery(DELAY, "battery.data", "battery");
+    AnalogSensor sensor_temperature(DELAY, "environment_data/temp.data", "temperature");
+    AnalogSensor sensor_smoke(DELAY, "environment_data/smoke.data", "smoke");
+    AnalogSensor sensor_battery(DELAY, "environment_data/battery.data", "battery");
 
     // the buttons
     // this button allows the user to purposely trigger the alarm
