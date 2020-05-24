@@ -49,11 +49,11 @@ for t in range(0, simulationTime):
 
     if doWriteData is True:
         tempFile = open(tempDataFile, "w")
-        tempFile.write(str(temperature))
+        tempFile.write("{:.2f}".format(temperature))
         tempFile.close()
 
         smokeFile = open(smokeDataFile, 'w')
-        smokeFile.write(str(smoke))
+        smokeFile.write("{:.2f}".format(smoke))
         smokeFile.close()
 
         sleep(1)
