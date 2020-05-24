@@ -1,12 +1,19 @@
+import os
 import matplotlib.pyplot as plt
 from math import exp
 from noise import pnoise1
 from time import sleep
 
+
 from analog_sensors_settings import *
+
+# Get the path to the place to save data in
+save_path = os.path.dirname(os.path.realpath(__file__)) + "/" + dataFolder
 
 
 # Sigmoid functions used to simulate changing data after the fire starts
+
+
 def sigm(time, t0, rt):
     return 1 / (1 + exp(-(time - (t0 + 5*rt)) / rt))
 
@@ -35,9 +42,11 @@ for t in range(0, simulationTime):
                                delta=fireSmoke + fireDeltaSmoke * pnoise1(x=smokeOffset + (tFire + 10*smokeRT) / scale,
                                                                           octaves=octaves), rt=smokeRT)
         elif tFire + 10 * smokeRT <= t:
-            smoke += 5 + 5 * pnoise1(x=smokeOffset + t / scale, octaves=octaves)
+            smoke += 5 + 5 * pnoise1(x=smokeOffset +
+                                     t / scale, octaves=octaves)
     else:  # Temperature will stand arround stdTemp and smoke sensor will only see some background noise
-        temperature += stdTemp + deltaTemp * pnoise1(x=tempOffset + t / scale, octaves=octaves)
+        temperature += stdTemp + deltaTemp * \
+            pnoise1(x=tempOffset + t / scale, octaves=octaves)
         if t == fireStartAt:  # Fire will trigger at t=fireStartAt
             fireToggled = True
             tFire = t
@@ -48,11 +57,11 @@ for t in range(0, simulationTime):
         TIME.append(t)
 
     if doWriteData is True:
-        tempFile = open(tempDataFile, "w")
+        tempFile = open(save_path + tempDataFile, "w")
         tempFile.write("{:.2f}".format(temperature))
         tempFile.close()
 
-        smokeFile = open(smokeDataFile, 'w')
+        smokeFile = open(save_path + smokeDataFile, 'w')
         smokeFile.write("{:.2f}".format(smoke))
         smokeFile.close()
 
@@ -80,7 +89,8 @@ if doPlotData is True:
     ax2.plot(TIME, S, color=smokeColor)
     ax2.tick_params(axis='y', labelcolor=smokeColor)
     ax1.axvline(tFire, color=fireStartColor)
-    ax1.axhline(y=temperatureAlarmThreshold, color=temperatureColor, linestyle='--')
+    ax1.axhline(y=temperatureAlarmThreshold,
+                color=temperatureColor, linestyle='--')
     ax2.axhline(y=smokeAlarmThreshhold, color=smokeColor, linestyle='--')
 
     fig.tight_layout()
