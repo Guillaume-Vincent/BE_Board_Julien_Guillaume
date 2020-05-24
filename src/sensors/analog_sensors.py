@@ -22,7 +22,7 @@ S = []
 
 fireToggled = False
 tFire = 0
-for t in range(0, 300):
+for t in range(0, simulationTime):
     # Basic noise on sensors
     temperature = (random() - 0.5) * 2 * tempSensorNoise
     smoke = max(0, (random() - 0.5) * 2 * smokeSensorNoise)
