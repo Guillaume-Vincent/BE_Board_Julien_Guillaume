@@ -20,7 +20,7 @@ void AnalogSensor::update()
         std::string buffer;
         infile.open(this->file);
         infile >> buffer;
-        value = std::stof(buffer);
+        value = std::stoi(buffer);
     }
 }
 

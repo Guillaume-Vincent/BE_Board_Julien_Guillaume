@@ -12,7 +12,11 @@
 #define LOW 0
 #define MAX_I2C_DEVICES 4
 #define I2C_BUFFER_SIZE 1024
-#define MAX_IO_PIN 8
+#define MAX_IO_PIN 9
+#define RESET_COUNTER 10
+#define THRESHOLD_TEMPERATURE 50
+#define THRESHOLD_SMOKE 500
+#define THRESHOLD_BATTERY 20
 
 using namespace std;
 

@@ -24,7 +24,7 @@ public:
 class AnalogSensor : public Sensor
 {
 private:
-    float value;
+    int value;
 
 public:
     AnalogSensor(int delay, std::string file, std::string name);
