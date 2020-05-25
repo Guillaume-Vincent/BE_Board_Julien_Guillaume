@@ -18,8 +18,8 @@ protected:
 public:
     Sensor(int delay, std::string file, std::string name);
     // updates the value of the sensor
-    virtual void update();
-    virtual void run();
+    virtual void update() = 0;
+    //virtual void run();
 };
 
 class AnalogSensor : public Sensor
