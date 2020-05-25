@@ -25,16 +25,21 @@ T = []
 S = []
 
 if doWriteData is True:  # Set/Reset all data files
-    tempFile = open(tempDataFile, "w")
+    # Create a directory (do nothing if directory already exists)
+    try:
+        os.mkdir(save_path)
+    except:
+        pass
+    tempFile = open(save_path + tempDataFile, "w")
     tempFile.write("0")
     tempFile.close()
 
-    smokeFile = open(smokeDataFile, 'w')
+    smokeFile = open(save_path + smokeDataFile, 'w')
     smokeFile.write("0")
     smokeFile.close()
 
     initialBattLevel = randint(20, 100)
-    battFile = open(battDataFile, "w")
+    battFile = open(save_path + battDataFile, "w")
     battFile.write(str(initialBattLevel))
     battFile.close()
 
@@ -80,6 +85,8 @@ for t in range(0, simulationTime):
             battFile = open(save_path + battDataFile, "r")
             battLevel = battFile.read()
             battFile.close()
+            if int(battLevel) < 0:
+                battLevel = "0"
             battFile = open(save_path + battDataFile, "w")
             battFile.write(str(int(battLevel) - randint(1, 5)))
             battFile.close()

@@ -63,22 +63,20 @@ void Board::loop()
     }
     // are we testing the alarm ?
     if (button_test_pressed)
-    {
         alarm_ringing = true;
-    }
 
     // Step 4 : shall we light the low battery led ?
     if (battery_level <= THRESHOLD_BATTERY)
-    {
         low_battery = true;
-    }
+    else
+        low_battery = false;
 
     // Step 5 : shall we light the armed led ?
     if (button_arm_pressed)
-    {
         // toggle the readiness of the alarm
-        alarm_ready = !alarm_ready;
-    }
+        alarm_ready = true;
+    else
+        alarm_ready = false;
 
     // Step 6 : handle the outputs
     // the ringingness of the alarm
@@ -106,17 +104,10 @@ void Board::loop()
     cout << "temperature : " << temperature << endl;
     cout << "smoke : " << smoke_level << endl;
     cout << "battery : " << battery_level << endl;
+    cout << "alarm ringing : " << alarm_ringing << endl;
+    cout << "alarm ready : " << alarm_ready << endl;
+    cout << "low battery : " << low_battery << endl;
     cout << endl;
 
     sleep(1);
-
-    /*todo : la loop
-    1- get all values
-    2- check if the alarm has been stopped (counter for a reset timing)
-    3- decide whether to trigger the alarm or not
-    4- decide whether to display the low battery led
-    5- decide whether to display the arm led
-    6- if needed, change the alarm state (armed or disarmed)
-    7- outputs : buzzer, leds...
-    7- reset_counter --*/
 }

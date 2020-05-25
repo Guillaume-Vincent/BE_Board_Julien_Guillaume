@@ -5,8 +5,29 @@
 Sensor::Sensor(int delay, std::string file, std::string name)
     : delay(delay), file(file), name(name) {}
 
+void Sensor::run()
+{
+  while (1)
+  {
+    cout << "empty sensor\n";
+    sleep(3);
+  }
+}
+
+void Sensor::update()
+{
+    while (1)
+    {
+        cout << "Sensor Update\n";
+        sleep(3);
+    }
+}
+
 AnalogSensor::AnalogSensor(int delay, std::string file, std::string name)
-    : Sensor(delay, file, name), value(0) {}
+    : Sensor(delay, file, name), value(0) {
+        if (!ifstream(this->file))
+            throw DeviceException(NOFILE);
+    }
 
 // Check if the file exists first
 // If it does, opens it and reads its content :
@@ -106,4 +127,20 @@ void LED::run()
         }
         sleep(delay);
     }
+}
+
+DeviceException::DeviceException(deviceExcepName e)
+    : e(e) {}
+
+std::string DeviceException::text(){
+  std::string s;
+  switch (e)
+  {
+  case NOFILE:
+    s = string("Le fichier spécifié n'a pas été trouvé");
+    break;
+  default:
+    s = string("Erreur inconnue");
+  }
+  return s;
 }

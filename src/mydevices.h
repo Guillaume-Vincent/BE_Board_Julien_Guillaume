@@ -18,7 +18,8 @@ protected:
 public:
     Sensor(int delay, std::string file, std::string name);
     // updates the value of the sensor
-    virtual void update() = 0;
+    virtual void update();
+    virtual void run();
 };
 
 class AnalogSensor : public Sensor
@@ -72,6 +73,22 @@ private:
 public:
     LED(int delay, std::string color, std::string name);
     virtual void run();
+};
+
+// List of exceptions we can handle
+enum deviceExcepName
+{
+    NOFILE
+};
+
+// Management of device exceptions
+class DeviceException
+{
+private:
+    deviceExcepName e;
+public:
+  DeviceException(deviceExcepName e);
+  std::string text();
 };
 
 #endif

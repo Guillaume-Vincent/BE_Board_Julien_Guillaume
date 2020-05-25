@@ -1,0 +1,4 @@
+Placez ici les fichiers boutons:
+-> "arm.button"  :  bouton d'armement de l'alarme
+-> "reset.button" : bouton de reset de l'alarme
+-> "test.button" :	bouton de test de lalarme
