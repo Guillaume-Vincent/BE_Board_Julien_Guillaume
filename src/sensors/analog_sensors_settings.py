@@ -10,6 +10,8 @@ dataFolder = "../environment_data/"
 tempDataFile = "temp.data"
 # Name of the file to write the smoke data in (default : "smoke.data")
 smokeDataFile = "smoke.data"
+# Name of the file to write the battery levels in (default : "battery.data")
+battDataFile = "battery.data"
 # If True, will show the data in a graph after the end of the simulation (default : False)
 doPlotData = True
 # If True, will write smoke and temperature data in a file every second (default : True)

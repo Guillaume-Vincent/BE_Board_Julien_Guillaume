@@ -4,7 +4,6 @@ from math import exp
 from noise import pnoise1
 from time import sleep
 
-
 from analog_sensors_settings import *
 
 # Get the path to the place to save data in
@@ -12,8 +11,6 @@ save_path = os.path.dirname(os.path.realpath(__file__)) + "/" + dataFolder
 
 
 # Sigmoid functions used to simulate changing data after the fire starts
-
-
 def sigm(time, t0, rt):
     return 1 / (1 + exp(-(time - (t0 + 5*rt)) / rt))
 
@@ -26,6 +23,20 @@ def fire_data(time, t0, delta, rt):
 TIME = []
 T = []
 S = []
+
+if doWriteData is True:  # Set/Reset all data files
+    tempFile = open(tempDataFile, "w")
+    tempFile.write("0")
+    tempFile.close()
+
+    smokeFile = open(smokeDataFile, 'w')
+    smokeFile.write("0")
+    smokeFile.close()
+
+    initialBattLevel = randint(20, 100)
+    battFile = open(battDataFile, "w")
+    battFile.write(str(initialBattLevel))
+    battFile.close()
 
 fireToggled = False
 tFire = 0
@@ -65,16 +76,15 @@ for t in range(0, simulationTime):
         smokeFile.write(str(int(100 * smoke)))
         smokeFile.close()
 
+        if t % 5 == 0:
+            battFile = open(save_path + battDataFile, "r")
+            battLevel = battFile.read()
+            battFile.close()
+            battFile = open(save_path + battDataFile, "w")
+            battFile.write(str(int(battLevel) - randint(1, 5)))
+            battFile.close()
+
         sleep(1)
-
-if doWriteData is True:  # Clear the data files
-    tempFile = open(tempDataFile, "w")
-    tempFile.write("")
-    tempFile.close()
-
-    smokeFile = open(smokeDataFile, 'w')
-    smokeFile.write("")
-    smokeFile.close()
 
 if doPlotData is True:
     fig, ax1 = plt.subplots()
