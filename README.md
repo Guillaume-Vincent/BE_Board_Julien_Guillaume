@@ -34,3 +34,4 @@ Ce programme simule un incendie du point de vue des capteurs environnementaux du
 
 - _controlpanel<span></span>.py_ : Ce programme permet d'avoir une interface graphique permettant de simuler les boutons du systèmes, en créant/supprimant les fichiers .button de manière très aisée.
 
+Attention, pour utiliser ces scripts python, il vous faut avoir sur votre machine python3 et vous faudra sans doute installer certaines librairies comme `noise` ou `tkinter`.
