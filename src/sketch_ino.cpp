@@ -1,13 +1,13 @@
 #include <unistd.h>
 #include "core_simulation.h"
 
-// la fonction d'initialisation d'arduino
+// Arduino initialization function
 void Board::setup()
 {
-    // on configure la vitesse de la liaison
+    // Setting up the data rate
     Serial.begin(9600);
-    // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
 
+    // Fixing input and output pins according to the sensors/actuators connected to the board
     pinMode(0, INPUT);
     pinMode(1, INPUT);
     pinMode(2, INPUT);
@@ -19,7 +19,7 @@ void Board::setup()
     pinMode(8, OUTPUT);
 }
 
-// la boucle de controle arduino
+// Arduino control loop
 void Board::loop()
 {
     static bool alarm_ringing = false;
@@ -35,7 +35,7 @@ void Board::loop()
     bool button_reset_pressed;
     bool button_arm_pressed;
 
-    // Step 1 : get environmental values
+    // Reading environmental data
     temperature = analogRead(0);
     smoke_level = analogRead(1);
     battery_level = analogRead(2);
@@ -44,67 +44,71 @@ void Board::loop()
     button_reset_pressed = digitalRead(4);
     button_arm_pressed = digitalRead(5);
 
-    // Step 2 : must the alarm be stopped ?
+    // Checking if the reset button is pressed
     if (button_reset_pressed)
     {
+        // The alarm must stop ringing
         alarm_ringing = false;
+        // Reseting a counter after which the alarm will be able to sound again
         reset_counter = RESET_COUNTER;
     }
 
-    // Step 3 : shall we trigger the alarm ?
-    // is there a fire ?
+    // Checking if the alarm must be triggered
+    // 1) In case of a fire (the reset counter must be 0 and the alarm must be armed)
     if (alarm_ready && (reset_counter == 0))
     {
         if ((temperature >= THRESHOLD_TEMPERATURE) || (smoke_level >= THRESHOLD_SMOKE))
         {
-            // the alarm must ring
+            // The alarm must ring when the temperature or the smoke levels are above their respective thresholds
             alarm_ringing = true;
         }
     }
-    // are we testing the alarm ?
+    // 2) If the user is testing the alarm using the test button 
     if (button_test_pressed)
         alarm_ringing = true;
 
-    // Step 4 : shall we light the low battery led ?
+    // Checking if the "low battery" LED should be lit or unlit
     if (battery_level <= THRESHOLD_BATTERY)
         low_battery = true;
     else
         low_battery = false;
 
-    // Step 5 : shall we light the armed led ?
+    // Checking if the "armed" LED should be lit or unlit
     if (button_arm_pressed)
-        // toggle the readiness of the alarm
         alarm_ready = true;
     else
         alarm_ready = false;
 
-    // Step 6 : handle the outputs
-    // the ringingness of the alarm
+    // Handling the outputs
+    // The buzzer
     if (alarm_ringing)
         digitalWrite(8, HIGH);
     else
         digitalWrite(8, LOW);
 
-    // the lightness of the low battery led
+    // The "low battery" LED
     if (low_battery)
         digitalWrite(7, HIGH);
     else
         digitalWrite(7, LOW);
 
-    // the lightness of the alarm state led
+    // The "armed" LED
     if (alarm_ready)
         digitalWrite(6, HIGH);
     else
         digitalWrite(6, LOW);
 
+    // Decrement the reset counter
     if (reset_counter > 0)
         reset_counter--;
 
-    // display the environmental status
+    // Display the environmental data
     cout << "temperature : " << temperature << endl;
     cout << "smoke : " << smoke_level << endl;
     cout << "battery : " << battery_level << endl;
     cout << "alarm ringing : " << alarm_ringing << endl;
+
+    // Display the output values
     cout << "alarm ready : " << alarm_ready << endl;
     cout << "low battery : " << low_battery << endl;
     cout << endl;

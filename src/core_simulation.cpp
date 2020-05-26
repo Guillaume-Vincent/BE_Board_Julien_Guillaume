@@ -4,7 +4,7 @@
 
 #include "core_simulation.h"
 
-// class BoardException
+// BoardException class
 int BoardException::get() { return num; }
 
 string BoardException::text()
@@ -33,7 +33,7 @@ string BoardException::text()
   return s;
 }
 
-// classe terminal
+// Terminal class
 void Terminal::begin(int speed)
 {
   if (speed != 9600)
@@ -47,7 +47,7 @@ void Terminal::println(string s)
   cout << "Serial: " << s << endl;
 }
 
-// representatoin du bus I2C
+// I2C class
 I2C::I2C()
 {
   for (int i = 0; i < MAX_I2C_DEVICES; i++)
@@ -112,7 +112,7 @@ bool *I2C::getVide(int addr)
   return (&vide[addr]);
 }
 
-// classe generique reprenstant un capteur/actionneur
+// Generic class representing a sensor/actuator
 Device::Device()
 {
   ptrtype = NULL;
@@ -142,7 +142,7 @@ void Device::setI2CAddr(int addr, I2C *bus)
   i2cbus = bus;
 }
 
-// classe representant une carte arduino
+// class representing an arduino board
 void Board::run()
 {
   try

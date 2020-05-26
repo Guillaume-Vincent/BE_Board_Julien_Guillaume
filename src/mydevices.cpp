@@ -1,29 +1,33 @@
 #include "mydevices.h"
 #include "core_simulation.h"
 
-// Sensors constructors
+// Sensor constructor
 Sensor::Sensor(int delay, std::string file, std::string name)
     : delay(delay), file(file), name(name) {}
 
+
+// AnalogSensor constructor - Will throw an exception if file doesn't exist
 AnalogSensor::AnalogSensor(int delay, std::string file, std::string name)
     : Sensor(delay, file, name), value(0) {
         if (!ifstream(this->file))
             throw DeviceException(NOFILE);
     }
 
-// Check if the file exists
-// If it does, opens it and reads its content
 void AnalogSensor::update()
 {
+    // todo : exception : if bad argument do nothing and wait for the next one
+    // if bad argument too many times, stop the program and alert the user
+
+    // Check if file exists
     if (ifstream(this->file))
     {
-        // the file does exist
         ifstream infile;
         std::string buffer;
+        // Open the file
         infile.open(this->file);
+        // Store its content in a buffer
         infile >> buffer;
-        // todo : exception : if bad argument do nothing and wait for the next one
-        // if bad argument too many times, stop the program and alert the user
+        // Convert the buffer to an integer and store it in value
         value = std::stoi(buffer);
     }
 }
@@ -39,13 +43,14 @@ void AnalogSensor::run()
     }
 }
 
+
+// DigitalSensor constructor
 DigitalSensor::DigitalSensor(int delay, std::string file, std::string name)
     : Sensor(delay, file, name), state(LOW) {}
 
-// Checks if the file exists
-// Change the state to true if it does, false if not
 void DigitalSensor::update()
 {
+    // Check if file exists and change the state of the sensor accordingly
     if (ifstream(this->file))
         state = true;
     else
@@ -63,9 +68,13 @@ void DigitalSensor::run()
     }
 }
 
+
+// DigitalActuator constructor
 DigitalActuator::DigitalActuator(int delay, std::string name)
     : delay(delay), state(LOW), name(name) {}
 
+
+// Buzzer constructor
 Buzzer::Buzzer(int delay, int frequency, std::string name)
     : DigitalActuator(delay, name), frequency(frequency) {}
 
@@ -78,6 +87,7 @@ void Buzzer::run()
             state = *ptrmem;
         if (oldstate != state)
         {
+            // Display the new state of the alarm
             if (state == LOW)
                 cout << "/!\\ ALARM OFF /!\\" << endl;
             else
@@ -88,6 +98,8 @@ void Buzzer::run()
     }
 }
 
+
+// LED constructor
 LED::LED(int delay, std::string color, std::string name)
     : DigitalActuator(delay, name), color(color) {}
 
@@ -100,6 +112,7 @@ void LED::run()
             state = *ptrmem;
         if (oldstate != state)
         {
+            // Display the new state of the LED
             if (state == LOW)
                 cout << name << " off" << endl;
             else
@@ -110,6 +123,8 @@ void LED::run()
     }
 }
 
+
+// DeviceException constructor
 DeviceException::DeviceException(deviceExcepName e)
     : e(e) {}
 
