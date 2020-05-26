@@ -2,12 +2,12 @@
 #include "core_simulation.h"
 
 // Sensor constructor
-Sensor::Sensor(int delay, std::string file, std::string name)
-    : delay(delay), file(file), name(name) {}
+Sensor::Sensor(int delay, std::string file)
+    : delay(delay), file(file) {}
 
 // AnalogSensor constructor - Will throw an exception if file doesn't exist
-AnalogSensor::AnalogSensor(int delay, std::string file, std::string name)
-    : Sensor(delay, file, name), value(0)
+AnalogSensor::AnalogSensor(int delay, std::string file)
+    : Sensor(delay, file), value(0)
 {
     if (!ifstream(this->file))
         throw DeviceException(NOFILE);
@@ -44,8 +44,8 @@ void AnalogSensor::run()
 }
 
 // DigitalSensor constructor
-DigitalSensor::DigitalSensor(int delay, std::string file, std::string name)
-    : Sensor(delay, file, name), state(LOW) {}
+DigitalSensor::DigitalSensor(int delay, std::string file)
+    : Sensor(delay, file), state(LOW) {}
 
 void DigitalSensor::update()
 {
@@ -68,12 +68,12 @@ void DigitalSensor::run()
 }
 
 // DigitalActuator constructor
-DigitalActuator::DigitalActuator(int delay, std::string name)
-    : delay(delay), state(LOW), name(name) {}
+DigitalActuator::DigitalActuator(int delay)
+    : delay(delay), state(LOW) {}
 
 // Buzzer constructor
-Buzzer::Buzzer(int delay, int frequency, std::string name)
-    : DigitalActuator(delay, name), frequency(frequency) {}
+Buzzer::Buzzer(int delay, int frequency)
+    : DigitalActuator(delay), frequency(frequency) {}
 
 void Buzzer::run()
 {
@@ -96,8 +96,8 @@ void Buzzer::run()
 }
 
 // LED constructor
-LED::LED(int delay, std::string color, std::string name)
-    : DigitalActuator(delay, name), color(color) {}
+LED::LED(int delay, std::string color)
+    : DigitalActuator(delay), color(color) {}
 
 void LED::run()
 {
@@ -110,9 +110,9 @@ void LED::run()
         {
             // Display the new state of the LED
             if (state == LOW)
-                cout << name << " off" << endl;
+                cout << color << " led off" << endl;
             else
-                cout << name << " on" << endl;
+                cout << color << " led on" << endl;
             oldstate = state;
         }
         sleep(delay);
