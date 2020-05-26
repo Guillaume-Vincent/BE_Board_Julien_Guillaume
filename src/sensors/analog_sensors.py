@@ -85,10 +85,13 @@ for t in range(0, simulationTime):
             battFile = open(save_path + battDataFile, "r")
             battLevel = battFile.read()
             battFile.close()
-            if int(battLevel) < 0:
+            battLevel = int(battLevel) - randint(1, 5)
+            if battLevel < 0:
                 battLevel = "0"
+            else:
+                battLevel = str(battLevel)
             battFile = open(save_path + battDataFile, "w")
-            battFile.write(str(int(battLevel) - randint(1, 5)))
+            battFile.write(battLevel)
             battFile.close()
 
         sleep(1)
