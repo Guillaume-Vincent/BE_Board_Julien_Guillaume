@@ -126,7 +126,7 @@ std::string DeviceException::text() const
     switch (errorName)
     {
     case NOFILE:
-        s = string("Le fichier spécifié n'a pas été trouvé");
+        s = string("Au moins un fichier .data n'a pas été trouvé\nMerci de lancer la simulation !");
         break;
     default:
         s = string("Erreur inconnue");
@@ -136,6 +136,6 @@ std::string DeviceException::text() const
 
 std::ostream &operator<<(std::ostream &os, const DeviceException &de)
 {
-    os << " Erreur : " << de.text() << endl;
+    os << "Erreur : " << de.text() << endl;
     return (os);
 }
