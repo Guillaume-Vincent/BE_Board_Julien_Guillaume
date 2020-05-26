@@ -31,11 +31,12 @@ def toggle_test():
     if (os.path.isfile(path)):
         os.remove(path)
         button_test.configure(text="Appuyer sur le bouton de test")
-        print("Bouton test enfoncé")
+        print("Bouton test relâché")
 
     else:
         open(path, 'a').close()
         button_test.configure(text="Relâcher le bouton de test")
+        print("Bouton test enfoncé")
 
 
 def toggle_reset():
@@ -44,17 +45,17 @@ def toggle_reset():
     if (os.path.isfile(path)):
         os.remove(path)
         button_reset.configure(text="Appuyer sur le bouton de reset")
-        print("Bouton reset enfoncé")
+        print("Bouton reset relâché")
 
     else:
         open(path, 'a').close()
         button_reset.configure(text="Relâcher le bouton de reset")
-        print("Bouton reset relâché")
+        print("Bouton reset enfoncé")
 
 
 def changeBatteries(path):
     """Writes 100 to the specified file"""
-    print("Changing batteries")
+    print("Batteries changées")
     open(path, 'w').write("100")
 
 
