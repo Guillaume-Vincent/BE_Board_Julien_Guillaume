@@ -85,7 +85,7 @@ void Buzzer::run()
             if (state == LOW)
                 cout << "/!\\ ALARM OFF /!\\" << endl;
             else
-                cout << "/!\\ ALARM ON /!\\" << endl;
+                cout << "/!\\ ALARM ON - Sounding at " << frequency << "Hz /!\\" << endl;
             oldstate = state;
         }
         sleep(delay);
