@@ -13,8 +13,8 @@ Les périphériques utilisés sont :
     - capteur de niveau de fumée
     - capteur de niveau de batterie
 - 2 LEDs : 
-    - Indicateur de statut de l'alarme : allumée lorsque l'alarme est armée
-    - Indicateur de niveau de batterie : allumée lorsque le niveau de batterie est faible
+    - Indicateur de statut de l'alarme : led rouge allumée lorsque l'alarme est armée
+    - Indicateur de niveau de batterie : led orange allumée lorsque le niveau de batterie est faible
 
 ### Utilisation classique
 Il y a plusieurs manière de faire fonctionner le système simulé. On peut simplement écrire dans les fichier suivants pour modifier les valeurs environnementales de niveaux de température, de fumée et de batterie : 
@@ -30,7 +30,7 @@ De plus, l'état des boutons est simulé par la présence et l'absence des fichi
 ### Utilisation simplifiée
 Cependant, devant la complexité et le caractère rébarbatif des manipulations décrites précédemment, nous avons jugé bon de les automatiser avec deux scripts python : 
 - _sensors/analog_sensors.py_ : 
-Ce programme simule un incendie du point de vue des capteurs environnementaux du système d'alarme. La configuration est réalisable dans _analog_sensors_settings.py_. Par défault, la simulation dure 5 minutes.
+Ce programme simule un incendie du point de vue des capteurs environnementaux du système d'alarme. Par défaut, ce script génère toutes les secondes des valeurs de température et de fumée, et diminue toutes les 5 secondes le pourcentage de batterie restant. 20 secondes après le démarrage du programme survient un incendie, et les valeurs de température et de fumée montent alors progressivement dans les quelques dizaines secondes qui suivent. La simulation dure 3 minutes par défaut. Tous les paramètres sont éditables facilement dans le fichier _analog_sensors_settings.py_.
 
-- _controlpanel<span></span>.py_ : Ce programme permet d'avoir une interface graphique permettant de simuler les boutons du systèmes, en créant/supprimant les fichiers .button
+- _controlpanel<span></span>.py_ : Ce programme permet d'avoir une interface graphique permettant de simuler les boutons du systèmes, en créant/supprimant les fichiers .button de manière très aisée.
 
