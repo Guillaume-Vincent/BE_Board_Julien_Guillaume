@@ -2,8 +2,8 @@
 from random import randint, random
 
 """Simulation Settings"""
-# Amount of time the simulation will run (s) (default : 300)
-simulationTime = 300
+# Amount of time the simulation will run (s) (default : 180)
+simulationTime = 180
 # Relative path from the python script to the folder to put the environmental data in (default : environment_data)
 dataFolder = "../environment_data/"
 # Name of the file to write the temperature data in (default : "temp.data")
@@ -68,8 +68,8 @@ smokeRiseTimeMax = 45
 smokeSensorNoise = 0.05
 
 "Fire Settings"
-# Time the fire will start at (s) (default : 30)
-fireStartAt = 30
+# Time the fire will start at (s) (default : 20)
+fireStartAt = 20
 
 
 """Standard Random Settings : DO NOT CHANGE"""
