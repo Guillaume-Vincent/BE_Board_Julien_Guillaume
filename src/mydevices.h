@@ -19,7 +19,7 @@ protected:
     std::string name;
 
 public:
-    // Initialise delay, file, and name variables 
+    // Initialise delay, file, and name variables
     Sensor(int delay, std::string file, std::string name);
     // Update the value of the sensor
     virtual void update() = 0;
@@ -73,7 +73,7 @@ public:
 class Buzzer : public DigitalActuator
 {
 private:
-    // Audio frequency of the buzzer 
+    // Audio frequency of the buzzer
     int frequency;
 
 public:
@@ -107,13 +107,14 @@ class DeviceException
 {
 private:
     // Name of the exception
-    deviceExcepName e;
+    deviceExcepName errorName;
 
 public:
     // Creating the exception using its name
-    DeviceException(deviceExcepName e);
+    DeviceException(deviceExcepName errorName);
     // Return a different text depending on the exception
-    std::string text();
+    std::string text() const;
+    friend std::ostream &operator<<(std::ostream &os, const DeviceException &de);
 };
 
 #endif

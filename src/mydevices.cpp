@@ -5,13 +5,13 @@
 Sensor::Sensor(int delay, std::string file, std::string name)
     : delay(delay), file(file), name(name) {}
 
-
 // AnalogSensor constructor - Will throw an exception if file doesn't exist
 AnalogSensor::AnalogSensor(int delay, std::string file, std::string name)
-    : Sensor(delay, file, name), value(0) {
-        if (!ifstream(this->file))
-            throw DeviceException(NOFILE);
-    }
+    : Sensor(delay, file, name), value(0)
+{
+    if (!ifstream(this->file))
+        throw DeviceException(NOFILE);
+}
 
 void AnalogSensor::update()
 {
@@ -43,7 +43,6 @@ void AnalogSensor::run()
     }
 }
 
-
 // DigitalSensor constructor
 DigitalSensor::DigitalSensor(int delay, std::string file, std::string name)
     : Sensor(delay, file, name), state(LOW) {}
@@ -68,11 +67,9 @@ void DigitalSensor::run()
     }
 }
 
-
 // DigitalActuator constructor
 DigitalActuator::DigitalActuator(int delay, std::string name)
     : delay(delay), state(LOW), name(name) {}
-
 
 // Buzzer constructor
 Buzzer::Buzzer(int delay, int frequency, std::string name)
@@ -98,7 +95,6 @@ void Buzzer::run()
     }
 }
 
-
 // LED constructor
 LED::LED(int delay, std::string color, std::string name)
     : DigitalActuator(delay, name), color(color) {}
@@ -123,20 +119,26 @@ void LED::run()
     }
 }
 
-
 // DeviceException constructor
-DeviceException::DeviceException(deviceExcepName e)
-    : e(e) {}
+DeviceException::DeviceException(deviceExcepName errorName)
+    : errorName(errorName) {}
 
-std::string DeviceException::text(){
-  std::string s;
-  switch (e)
-  {
-  case NOFILE:
-    s = string("Le fichier spécifié n'a pas été trouvé");
-    break;
-  default:
-    s = string("Erreur inconnue");
-  }
-  return s;
+std::string DeviceException::text() const
+{
+    std::string s;
+    switch (errorName)
+    {
+    case NOFILE:
+        s = string("Le fichier spécifié n'a pas été trouvé");
+        break;
+    default:
+        s = string("Erreur inconnue");
+    }
+    return s;
+}
+
+std::ostream &operator<<(std::ostream &os, const DeviceException &de)
+{
+    os << " Erreur : " << de.text() << endl;
+    return (os);
 }
