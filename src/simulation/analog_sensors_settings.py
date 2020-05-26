@@ -12,10 +12,10 @@ tempDataFile = "temp.data"
 smokeDataFile = "smoke.data"
 # Name of the file to write the battery levels in (default : "battery.data")
 battDataFile = "battery.data"
-# If True, will show the data in a graph after the end of the simulation (default : False)
+# If True, will show the data in a graph after the end of the simulation (default : True)
 doPlotData = True
 # If True, will write smoke and temperature data in a file every second (default : True)
-doWriteData = False
+doWriteData = True
 
 """Plot Settings"""
 # Color of the temperature plot (default : "tab:red")
