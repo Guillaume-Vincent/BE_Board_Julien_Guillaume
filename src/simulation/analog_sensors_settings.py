@@ -4,7 +4,7 @@ from random import randint, random
 """Simulation Settings"""
 # Amount of time the simulation will run (s) (default : 180)
 simulationTime = 180
-# Relative path from the python script to the folder to put the environmental data in (default : environment_data)
+# Relative path from the python script to the folder to put the environmental data in (default : "../environment_data/")
 dataFolder = "../environment_data/"
 # Name of the file to write the temperature data in (default : "temp.data")
 tempDataFile = "temp.data"
@@ -15,7 +15,7 @@ battDataFile = "battery.data"
 # If True, will show the data in a graph after the end of the simulation (default : False)
 doPlotData = True
 # If True, will write smoke and temperature data in a file every second (default : True)
-doWriteData = True
+doWriteData = False
 
 """Plot Settings"""
 # Color of the temperature plot (default : "tab:red")
@@ -26,8 +26,8 @@ smokeColor = "tab:blue"
 fireStartColor = "black"
 # Temperature threshold above which the alarm will detect a fire (°C) (default : 50)
 temperatureAlarmThreshold = 50
-# Obscuration threshold above which the alarm will detech a fire (%/ft) (default : 5)
-smokeAlarmThreshhold = 5
+# Obscuration threshold above which the alarm will detech a fire (0.01%/ft) (default : 5)
+smokeAlarmThreshhold = 500
 
 """Perlin Noise Settings"""
 # Zoom level of the perlin noise (default : 100)
@@ -44,28 +44,28 @@ deltaTemp = 2
 fireTemp = 100
 # Temperature variation when there is a fire (°C) (default : N/A)
 # fireDeltaTemp = N/A
-# Min time for the heat to fully reach the sensor after a fire has started (s) (default : 60)
-tempRiseTimeMin = 60
-# Maxi time for the heat to fully reach the sensor after a fire has started (s) (default : 120)
-tempRiseTimeMax = 120
+# Min time for the heat to fully reach the sensor after a fire has started (s) (default : 50)
+tempRiseTimeMin = 50
+# Maxi time for the heat to fully reach the sensor after a fire has started (s) (default : 100)
+tempRiseTimeMax = 100
 # Background noise on the temperature sensor (°C) (default : 0.05)
-tempSensorNoise = 0.05
+tempSensorNoise = 0.2
 
 "Smoke Settings"
-# Standard average obscuration (%/ft) (default : N/A)
+# Standard average obscuration (0.01%/ft) (default : N/A)
 # stdSmoke = N/A
-# Standard obscuration variation (%/ft) (default : N/A)
+# Standard obscuration variation (0.01%/ft) (default : N/A)
 # deltaSmoke = N/A
-# Average obscuration when there is a fire (%/ft)  (default : 5)
-fireSmoke = 5
-# Obscuration variation when there is a fire (%/ft) (default : 5)
-fireDeltaSmoke = 5
-# Min time for the smoke to fully reach the sensors after a fire has started (s) (default : 30)
-smokeRiseTimeMin = 30
-# Max time for the smoke to fully reach the sensors after a fire has started (s) (default : 45)
-smokeRiseTimeMax = 45
-# Background noise on the smoke sensor (%/ft) (default : 0.05)
-smokeSensorNoise = 0.05
+# Average obscuration when there is a fire (0.01%/ft)  (default : 500)
+fireSmoke = 500
+# Obscuration variation when there is a fire (0.01%/ft) (default : 500)
+fireDeltaSmoke = 500
+# Min time for the smoke to fully reach the sensors after a fire has started (s) (default : 40)
+smokeRiseTimeMin = 40
+# Max time for the smoke to fully reach the sensors after a fire has started (s) (default : 50)
+smokeRiseTimeMax = 50
+# Background noise on the smoke sensor (0.01%/ft) (default : 5)
+smokeSensorNoise = 5
 
 "Fire Settings"
 # Time the fire will start at (s) (default : 20)

@@ -58,8 +58,7 @@ for t in range(0, simulationTime):
                                delta=fireSmoke + fireDeltaSmoke * pnoise1(x=smokeOffset + (tFire + 10*smokeRT) / scale,
                                                                           octaves=octaves), rt=smokeRT)
         elif tFire + 10 * smokeRT <= t:
-            smoke += 5 + 5 * pnoise1(x=smokeOffset +
-                                     t / scale, octaves=octaves)
+            smoke += fireSmoke + fireDeltaSmoke * pnoise1(x=smokeOffset + t / scale, octaves=octaves)
     else:  # Temperature will stand arround stdTemp and smoke sensor will only see some background noise
         temperature += stdTemp + deltaTemp * \
             pnoise1(x=tempOffset + t / scale, octaves=octaves)
@@ -78,7 +77,7 @@ for t in range(0, simulationTime):
         tempFile.close()
 
         smokeFile = open(save_path + smokeDataFile, 'w')
-        smokeFile.write(str(int(100 * smoke)))
+        smokeFile.write(str(int(smoke)))
         smokeFile.close()
 
         if t % 5 == 0:
@@ -104,8 +103,7 @@ if doPlotData is True:
     ax1.tick_params(axis='y', labelcolor=temperatureColor)
 
     ax2 = ax1.twinx()
-    ax2.set_ylabel('Obscuration (%/ft)', color=smokeColor)
-    ax2.set(ylim=(0, 15))
+    ax2.set_ylabel('Obscuration (0.01%/ft)', color=smokeColor)
     ax2.plot(TIME, S, color=smokeColor)
     ax2.tick_params(axis='y', labelcolor=smokeColor)
     ax1.axvline(tFire, color=fireStartColor)
