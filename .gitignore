@@ -1,5 +1,6 @@
-/src/arduino
+*arduino
 *.txt
 *.data
 *.pyc
 *.button
+*.json
