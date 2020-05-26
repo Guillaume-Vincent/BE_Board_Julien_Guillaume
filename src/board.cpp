@@ -14,21 +14,21 @@ int main()
 	try
 	{
 		// Analog Sensors will gather data about the environment (temperature, smoke and battery levels)
-		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/temp.data", "temperature"));
-		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/smoke.data", "smoke"));
-		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/battery.data", "battery"));
+		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/temp.data"));
+		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/smoke.data"));
+		boardDevices.push_back(new AnalogSensor(DELAY, "environment_data/battery.data"));
 
 		// Buttons allow the user to interact with the other devices (test, reset, or arm/disarm the alarm)
-		boardDevices.push_back(new DigitalSensor(DELAY, "button/test.button", "test button"));
-		boardDevices.push_back(new DigitalSensor(DELAY, "button/reset.button", "reset button"));
-		boardDevices.push_back(new DigitalSensor(DELAY, "button/arm.button", "arm button"));
+		boardDevices.push_back(new DigitalSensor(DELAY, "button/test.button"));
+		boardDevices.push_back(new DigitalSensor(DELAY, "button/reset.button"));
+		boardDevices.push_back(new DigitalSensor(DELAY, "button/arm.button"));
 
 		// LEDs will indicate the different status of the other devices (alarm ready, low battery)
-		boardDevices.push_back(new LED(DELAY, "red", "alarm state"));
-		boardDevices.push_back(new LED(DELAY, "orange", "low battery"));
+		boardDevices.push_back(new LED(DELAY, "red"));
+		boardDevices.push_back(new LED(DELAY, "orange"));
 
 		// The buzzer sounds when the alarm is triggered
-		boardDevices.push_back(new Buzzer(DELAY, 5, "buzzer"));
+		boardDevices.push_back(new Buzzer(DELAY, 500));
 
 		// Connecting every device to a pin of the board
 		for (unsigned int i = 0; i < boardDevices.size(); i++)
