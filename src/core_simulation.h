@@ -7,7 +7,6 @@
 #include <mutex>
 
 #define DELAY 1
-#define TEMP 22
 #define HIGH 1
 #define LOW 0
 #define MAX_IO_PIN 9

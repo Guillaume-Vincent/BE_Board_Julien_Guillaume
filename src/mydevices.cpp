@@ -15,9 +15,6 @@ AnalogSensor::AnalogSensor(int delay, std::string file)
 
 void AnalogSensor::update()
 {
-    // todo : exception : if bad argument do nothing and wait for the next one
-    // if bad argument too many times, stop the program and alert the user
-
     // Check if file exists
     if (ifstream(this->file))
     {
