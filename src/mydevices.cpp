@@ -83,9 +83,9 @@ void Buzzer::run()
         {
             // Display the new state of the alarm
             if (state == LOW)
-                cout << "/!\\ ALARM OFF /!\\" << endl;
+                cout << "-----> " << "/!\\ ALARM OFF /!\\" << endl;
             else
-                cout << "/!\\ ALARM ON - Sounding at " << frequency << "Hz /!\\" << endl;
+                cout << "-----> " << "/!\\ ALARM ON - Sounding at " << frequency << "Hz /!\\" << endl;
             oldstate = state;
         }
         sleep(delay);
@@ -107,9 +107,9 @@ void LED::run()
         {
             // Display the new state of the LED
             if (state == LOW)
-                cout << color << " led off" << endl;
+                cout << "-----> " << color << " led off" << endl;
             else
-                cout << color << " led on" << endl;
+                cout << "-----> " << color << " led on" << endl;
             oldstate = state;
         }
         sleep(delay);
