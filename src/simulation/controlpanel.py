@@ -6,9 +6,9 @@ import os
 # get the path to this script
 dirname = os.path.dirname(os.path.realpath(__file__))
 
-path_arm = dirname + "/button/arm.button"
-path_test = dirname + "/button/test.button"
-path_reset = dirname + "/button/reset.button"
+path_arm = dirname + "/../button/arm.button"
+path_test = dirname + "/../button/test.button"
+path_reset = dirname + "/../button/reset.button"
 
 
 def toggleFile(path):
