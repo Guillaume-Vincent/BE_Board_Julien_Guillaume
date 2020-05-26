@@ -47,78 +47,11 @@ void Terminal::println(string s)
   cout << "Serial: " << s << endl;
 }
 
-// I2C class
-I2C::I2C()
-{
-  for (int i = 0; i < MAX_I2C_DEVICES; i++)
-  {
-    registre[i] = new char[I2C_BUFFER_SIZE];
-    vide[i] = true;
-  }
-}
-
-bool I2C::isEmptyRegister(int addr)
-{
-  bool result = true;
-  if ((addr >= 0) && (addr < MAX_I2C_DEVICES))
-    result = vide[addr];
-  else
-    throw BoardException(ADDRESS);
-  return result;
-}
-
-int I2C::write(int addr, char *bytes, int size)
-{
-  if ((addr < 0) || (addr >= MAX_I2C_DEVICES))
-    throw BoardException(ADDRESS);
-  if ((size < 0) || (size > I2C_BUFFER_SIZE))
-    throw BoardException(SIZE);
-  tabmutex[addr].lock();
-  memcpy(registre[addr], bytes, size * sizeof(char));
-  vide[addr] = false;
-  tabmutex[addr].unlock();
-  return size;
-}
-
-int I2C::requestFrom(int addr, char *bytes, int size)
-{
-  int result = 0;
-  if ((addr < 0) || (addr >= MAX_I2C_DEVICES))
-    throw BoardException(ADDRESS);
-  if ((size < 0) || (size > I2C_BUFFER_SIZE))
-    throw BoardException(SIZE);
-  if (vide[addr] == false)
-  {
-    tabmutex[addr].lock();
-    memcpy(bytes, registre[addr], size * sizeof(char));
-    vide[addr] = true;
-    tabmutex[addr].unlock();
-    result = size;
-  }
-  return result;
-}
-
-char *I2C::getRegistre(int addr)
-{
-  if ((addr < 0) || (addr >= MAX_I2C_DEVICES))
-    throw BoardException(ADDRESS);
-  return (registre[addr]);
-}
-
-bool *I2C::getVide(int addr)
-{
-  if ((addr < 0) || (addr >= MAX_I2C_DEVICES))
-    throw BoardException(ADDRESS);
-  return (&vide[addr]);
-}
-
 // Generic class representing a sensor/actuator
 Device::Device()
 {
   ptrtype = NULL;
   ptrmem = NULL;
-  i2caddr = -1;
-  i2cbus = NULL;
 }
 
 void Device::run()
@@ -134,12 +67,6 @@ void Device::setPinMem(unsigned short *ptr, enum typeio *c)
 {
   ptrtype = c;
   ptrmem = ptr;
-}
-
-void Device::setI2CAddr(int addr, I2C *bus)
-{
-  i2caddr = addr;
-  i2cbus = bus;
 }
 
 // class representing an arduino board
@@ -202,12 +129,4 @@ int Board::analogRead(int i)
   else
     throw BoardException(INOUT);
   return result;
-}
-
-void Board::i2c(int addr, Device &dev)
-{
-  if ((addr < 0) || (addr >= MAX_I2C_DEVICES))
-    throw BoardException(ADDRESS);
-  dev.setI2CAddr(addr, &bus);
-  tabthreadbus[addr] = new thread(&Device::run, &dev);
 }
