@@ -11,6 +11,18 @@ path_test = dirname + "/../button/test.button"
 path_reset = dirname + "/../button/reset.button"
 path_batteries = dirname + "/../environment_data/battery.data"
 
+# get default state
+def_arm = "Armer l'alarme"
+def_test = "Appuyer sur le bouton de test"
+def_reset = "Appuyer sur le bouton de reset"
+
+if (os.path.isfile(path_arm)):
+    def_arm = "Désarmer l'alarme"
+if (os.path.isfile(path_test)):
+    def_test = "Relâcher le bouton de test"
+if (os.path.isfile(path_reset)):
+    def_reset = "Relâcher le bouton de reset"
+
 
 def toggle_arm():
     """Toggles the presence of the corresponding file"""
@@ -61,11 +73,11 @@ def changeBatteries(path):
 
 win = tkinter.Tk()
 win.title("Alarm control")
-button_arm = tkinter.Button(win, text="Armer l'alarme",
+button_arm = tkinter.Button(win, text=def_arm,
                             command=toggle_arm)
-button_test = tkinter.Button(win, text="Appuyer sur le bouton de test",
+button_test = tkinter.Button(win, text=def_test,
                              command=toggle_test)
-button_reset = tkinter.Button(win, text="Appuyer sur le bouton de reset",
+button_reset = tkinter.Button(win, text=def_reset,
                               command=toggle_reset)
 button_batteries = tkinter.Button(
     win, text="Changer les piles", command=lambda: changeBatteries(path_batteries))
