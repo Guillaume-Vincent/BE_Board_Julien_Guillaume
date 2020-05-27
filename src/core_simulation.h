@@ -91,6 +91,8 @@ public:
   void run();
   // accroachage d'un senseur/actionneur à une pin
   void pin(int p, Device &s);
+  // remise à zéro du tableau des io
+  void razio();
   // fonction arduino : configuration d'une pin en entree ou en sortie
   void pinMode(int p, enum typeio t);
   // fonction arduino : ecriture HIGH ou LOW sur une pin

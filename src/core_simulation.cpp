@@ -130,3 +130,9 @@ int Board::analogRead(int i)
     throw BoardException(INOUT);
   return result;
 }
+
+void Board::razio()
+{
+  for (unsigned int i=0; i<MAX_IO_PIN; i++)
+    io[i] = 0;
+}

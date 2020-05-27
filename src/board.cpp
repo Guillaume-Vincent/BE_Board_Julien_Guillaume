@@ -24,8 +24,8 @@ int main()
 		boardDevices.push_back(new DigitalSensor(DELAY, "button/arm.button"));
 
 		// LEDs will indicate the different status of the other devices (alarm ready, low battery)
-		boardDevices.push_back(new LED(DELAY, "red"));
-		boardDevices.push_back(new LED(DELAY, "orange"));
+		boardDevices.push_back(new LED(DELAY, "red"));		// Alarm ready LED
+		boardDevices.push_back(new LED(DELAY, "orange"));   // Low battery LED
 
 		// The buzzer sounds when the alarm is triggered
 		boardDevices.push_back(new Buzzer(DELAY, 500));
@@ -33,6 +33,8 @@ int main()
 		// Connecting every device to a pin of the board
 		for (unsigned int i = 0; i < boardDevices.size(); i++)
 			esp8266.pin(i, *boardDevices[i]);
+		// Setting every io to zero 
+		esp8266.razio();
 	}
 	catch (DeviceException e)
 	{

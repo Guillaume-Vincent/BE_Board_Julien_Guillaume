@@ -25,7 +25,15 @@ void AnalogSensor::update()
         // Store its content in a buffer
         infile >> buffer;
         // Convert the buffer to an integer and store it in value
-        value = std::stoi(buffer);
+        try
+        {
+            value = std::stoi(buffer);
+        }
+        catch (std::invalid_argument e)
+        {
+            cout << "Erreur : Les fichiers .data doivent contenir des entiers\n";
+            exit(0);
+        }
     }
 }
 
