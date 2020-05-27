@@ -60,6 +60,7 @@ def changeBatteries(path):
 
 
 win = tkinter.Tk()
+win.title("Alarm control")
 button_arm = tkinter.Button(win, text="Armer l'alarme",
                             command=toggle_arm)
 button_test = tkinter.Button(win, text="Appuyer sur le bouton de test",
