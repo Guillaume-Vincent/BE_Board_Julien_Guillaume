@@ -25,6 +25,7 @@ void Board::loop()
     static bool alarm_ringing = false;
     static bool alarm_ready = false;
     static bool low_battery = false;
+    static int battery_empty_timer = -1;
     static int reset_counter = 0;
 
     int temperature;
@@ -68,10 +69,26 @@ void Board::loop()
         alarm_ringing = true;
 
     // Checking if the "low battery" LED should be lit or unlit
-    if (battery_level <= THRESHOLD_BATTERY)
+    if (battery_level <= THRESHOLD_LOW_BATTERY)
         low_battery = true;
     else
         low_battery = false;
+
+    // If the battery is empty, shut the system down
+    if (battery_level <= SHUTDOWN_BATTERY_LEVEL)
+    {
+        if (battery_empty_timer == 0)
+        {
+            cout << "Batterie trop faible, arrêt du système o/\n";
+            exit(0);
+        }
+        else if (battery_empty_timer == -1)
+            battery_empty_timer = BATTERY_EMPTY_TIMER;
+        else
+            battery_empty_timer --;
+    }
+    else
+        battery_empty_timer = -1;
 
     // Checking if the "armed" LED should be lit or unlit
     if (button_arm_pressed)
